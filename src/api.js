@@ -18,7 +18,7 @@ export const getHome = async (searchQueryValue, page) => {
     return data;
 };
 
-export const getMuvieDetails = async (movieId) => {
+export const getMovieDetails = async (movieId) => {
     const params = new URLSearchParams({
         api_key: API_KEY,
         // q: searchQueryValue,
@@ -31,3 +31,18 @@ export const getMuvieDetails = async (movieId) => {
     const { data } = await axios.get(`/3/movie/${movieId}?language=en-US&${params}`);
     return data;
 };
+
+export const getSearchMovie = async (search) => {
+    const params = new URLSearchParams({
+        api_key: API_KEY,
+        // query: search,
+        // image_type: 'photo',
+        // orientation: 'orizontal',
+        // safesearch: 'true',
+        // per_page: '12',
+        // page: page,
+    });
+    const { data } = await axios.get(`/3/search/movie?query=${search}&include_adult=false&language=en-US&page=1&${params}`);
+    return data;
+};
+// https://api.themoviedb.org/3/search/movie?query=war&include_adult=false&language=en-US&page=1

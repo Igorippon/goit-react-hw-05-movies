@@ -1,4 +1,4 @@
-import { getMuvieDetails } from "api";
+import { getMovieDetails } from "api";
 import { Loader } from "components/Loader/Loader";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -13,6 +13,7 @@ export default function MovieDetails() {
     const [image, setImage] = useState('');
     const [genres, setGenres] = useState([]);
     const [loader, setLoader] = useState(false);
+    const [error, setError] = useState(false);
 
     const { movieId } = useParams();
 
@@ -20,23 +21,25 @@ export default function MovieDetails() {
         if (!movieId) {
             return
         };
-        async function getMuvie() {
+        async function getMovie() {
             try {
+                setError(false);
                 setLoader(true);
                 const { title, release_date, overview, genres, poster_path
-                } = await getMuvieDetails(movieId);
+                } = await getMovieDetails(movieId);
                 setTitle(title);
                 setDate(release_date.slice(0, 4));
                 setOverview(overview);
                 setImage(poster_path);
                 setGenres(genres.map(genre => genre.name));
             } catch (error) {
+                setError(true);
                 toast.error('Oops... something went wrong, please reload the page!');
             } finally {
                 setLoader(false);
             };
         };
-        getMuvie();
+        getMovie();
     }, [movieId]);
 
     const defaultImg = 'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700'
@@ -44,10 +47,14 @@ export default function MovieDetails() {
     return (
         <>
             {loader && <Loader />}
-            <h3>{title}<span>({date})</span></h3>
-            <p>{genres.join(" ")}</p>
-            <img src={image ? `https://image.tmdb.org/t/p/w500/${image}` : defaultImg} width={250} alt={title}></img>
-            <p>{overview}</p>
+            {!error && <div>
+                <h3>{title}<span>({date})</span></h3>
+                <h4>Genres</h4>
+                <p>{genres.join(" ")}</p>
+                <img src={image ? `https://image.tmdb.org/t/p/w500/${image}` : defaultImg} width={250} alt={title}></img>
+                <h4>Overview</h4>
+                <p>{overview}</p>
+            </div>}
         </>
     );
 };

@@ -2,13 +2,13 @@ import styled from 'styled-components'
 
 
 export const Header = styled.header`
- top: 0;
-  left: 0;
+//  top: 0;
+//   left: 0;
   width: 100%;
-  position: sticky;
-  z-index: 1100;
+  // position: sticky;
+  // z-index: 1100;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   min-height: 64px;
   padding-right: 24px;
