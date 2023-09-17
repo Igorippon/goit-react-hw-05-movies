@@ -1,9 +1,10 @@
 import { getMovieDetails } from "api";
 import { Loader } from "components/Loader/Loader";
+import { MovieItem } from "components/MovieItem/MovieItem";
 import { useState } from "react";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
-import { useParams } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 
 export default function MovieDetails() {
 
@@ -14,6 +15,7 @@ export default function MovieDetails() {
     const [genres, setGenres] = useState([]);
     const [loader, setLoader] = useState(false);
     const [error, setError] = useState(false);
+    const [score, setScore] = useState('');
 
     const { movieId } = useParams();
 
@@ -21,17 +23,20 @@ export default function MovieDetails() {
         if (!movieId) {
             return
         };
+        const controller = new AbortController();
         async function getMovie() {
             try {
-                setError(false);
                 setLoader(true);
-                const { title, release_date, overview, genres, poster_path
-                } = await getMovieDetails(movieId);
+                setError(false);
+                const { title, release_date, overview, genres, poster_path, vote_average
+
+                } = await getMovieDetails(movieId, { signal: controller.signal, });
                 setTitle(title);
                 setDate(release_date.slice(0, 4));
                 setOverview(overview);
                 setImage(poster_path);
                 setGenres(genres.map(genre => genre.name));
+                setScore(Math.ceil(vote_average * 10));
             } catch (error) {
                 setError(true);
                 toast.error('Oops... something went wrong, please reload the page!');
@@ -40,21 +45,24 @@ export default function MovieDetails() {
             };
         };
         getMovie();
+        return () => {
+            controller.abort();
+        }
     }, [movieId]);
 
-    const defaultImg = 'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700'
 
     return (
         <>
+            {
+                !error && <MovieItem image={image}
+                    title={title}
+                    date={date}
+                    score={score}
+                    genres={genres}
+                    overview={overview} />
+            }
+            <Outlet />
             {loader && <Loader />}
-            {!error && <div>
-                <h3>{title}<span>({date})</span></h3>
-                <h4>Genres</h4>
-                <p>{genres.join(" ")}</p>
-                <img src={image ? `https://image.tmdb.org/t/p/w500/${image}` : defaultImg} width={250} alt={title}></img>
-                <h4>Overview</h4>
-                <p>{overview}</p>
-            </div>}
         </>
     );
-};
+}

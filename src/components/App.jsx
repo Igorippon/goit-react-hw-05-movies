@@ -1,104 +1,26 @@
-// import { useEffect, useState } from "react";
-// import toast from 'react-hot-toast';
-import { Link, Route, Routes } from "react-router-dom";
-import { Layuot } from "./Layout";
+import { Route, Routes } from "react-router-dom";
+import { Layout } from "./Layout";
 import Home from "pages/Home";
 import Movies from "pages/Movies";
 import MovieDetails from "pages/MovieDetails";
-// import { Searchbar } from "./Searchbar/Searchbar";
-// import { ImageGallery } from "./ImageGallery/ImageGallery";
-// import { serviceSearch } from "api";
-// import { Button } from "./Button/Button.js";
-// import { Loader } from "./Loader/Loader";
-// import { Modal } from "./Modal/Modal";
+import { Reviews } from "./Reviews/Reviews";
+import { Cast } from "./Cast/Cast";
 
 export const App = () => {
-  // const [page, setPage] = useState(1);
-  // const [query, setQuery] = useState('');
-  // const [images, setImages] = useState([]);
-  // const [image, setImage] = useState('');
-  // const [total, setTotal] = useState(0);
-  // const [loader, setLoader] = useState(false);
-  // const [modal, setModal] = useState(false);
-  // const [tags, setTags] = useState('');
-  // const [randomId, setRandomId] = useState('');
-
-
-
-  // useEffect(() => {
-  //   if (query === '') {
-  //     return
-  //   };
-
-  //   async function getImages() {
-  //     try {
-  //       setLoader(true);
-  //       const { hits, totalHits } = await serviceSearch(query, page);
-  //       if (totalHits === 0) {
-  //         toast.error('Nothing found for your request');
-  //         return;
-  //       };
-  //       if (page === 1) {
-  //         toast.success(`Hooray! We found ${totalHits} images.`);
-  //       }
-  //       setImages(prevImages =>
-  //         [...prevImages, ...hits],
-  //       );
-  //       setTotal(Math.ceil(totalHits / 12));
-  //     } catch (error) {
-  //       toast.error('Oops... something went wrong, please reload the page!');
-  //     } finally {
-  //       setLoader(false);
-  //     };
-  //   };
-  //   getImages();
-
-  // }, [page, query, randomId]);
-
-  // const handlerSubmitForm = (searchValue) => {
-  //   setQuery(searchValue);
-  //   setRandomId(`${Date.now()}/${searchValue}`);
-  //   setPage(1);
-  //   setImages([]);
-  //   setTotal(0);
-  // };
-
-  // const handlerClickLoadMore = () => {
-  //   setPage(prevPage => (prevPage + 1));
-  // };
-
-  // const handlerClickImage = (largeImageURL, tags) => {
-  //   toggleModal();
-  //   setImage(largeImageURL);
-  //   setTags(tags);
-  // };
-
-  // const toggleModal = () => {
-  //   setModal(!modal);
-  // }
 
   return (
-    <Layuot >
-      <header>
-        <nav>
-          <Link to="/" >
-            Home
-          </Link>
-          <Link to="/movies">Movies</Link>
-        </nav>
-      </header>
+    <>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/movies" element={<Movies />} />
-        <Route path="/movies/:movieId" element={<MovieDetails />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="movies" element={<Movies />} />
+          <Route path="movies/:movieId" element={<MovieDetails />} >
+            <Route path="cast" element={<Cast />} />
+            <Route path="reviews" element={<Reviews />} />
+          </Route>
+        </Route>
       </Routes>
-      {/* <Searchbar onSubmit={handlerSubmitForm} />
-      <ImageGallery images={images}
-        onClick={handlerClickImage} />
-      {loader && <Loader />}
-      {images.length > 0 && page < total && <Button onClick={handlerClickLoadMore} />}
-      {modal && <Modal onClick={toggleModal} image={image} tags={tags} />} */}
-    </Layuot>
+    </>
   );
 };
 

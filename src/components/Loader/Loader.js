@@ -6,7 +6,7 @@ export const Loader = () => {
         height="100"
         width="100"
         ariaLabel="vortex-loading"
-        wrapperStyle={{}}
+        wrapperStyle={{ marginLeft: 'auto', marginRight: 'auto' }}
         wrapperClass="vortex-wrapper"
         colors={['red', 'green', 'blue', 'yellow', 'orange', 'purple']}
     />)

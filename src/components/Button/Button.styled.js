@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Btn = styled.button`
  padding: 8px 16px;
  margin: 0 auto;
-  border-radius: 2px;
+  border-radius: 8px;
   background-color: #3f51b5;
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   text-align: center;
