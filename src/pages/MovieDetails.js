@@ -53,6 +53,7 @@ export default function MovieDetails() {
 
     return (
         <>
+
             {
                 !error && <MovieItem image={image}
                     title={title}

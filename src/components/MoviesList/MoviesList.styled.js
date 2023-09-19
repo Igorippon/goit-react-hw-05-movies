@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const List = styled.ul`
+export const List = styled.ol`
  /* display: grid;
   max-width: calc(100vw - 48px);
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -11,7 +11,7 @@ export const List = styled.ul`
   list-style: none;
   margin-left: auto;
   margin-right: auto; */
-  list-style:inside;
+  /* list-style:inside; */
 `;
 
 export const Div = styled.div`

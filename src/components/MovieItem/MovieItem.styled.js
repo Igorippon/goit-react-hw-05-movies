@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const Item = styled.div`
 display: flex;
-padding: 20px 0px;
+margin: 20px 0px;
 gap: 30px;
 background-color: rgba(46, 47, 66, 0.02);
 box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.0), 0px 1px 1px rgba(46, 47, 66, 0.16), 0px 2px 1px rgba(46, 47, 66, 0.08);
@@ -16,12 +16,13 @@ gap:30px;
 `;
 
 export const Container = styled.div`
+margin-top: 20px;
 padding-left: 20px;
 padding-right:20px;
 `;
 
 export const H3 = styled.h3`
-margin-top: 20px
+margin-top: 20px;
 `;
 
 export const Ul = styled.ul`
