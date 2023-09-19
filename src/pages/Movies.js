@@ -26,7 +26,6 @@ export default function Movies() {
         if (pageUrl === '1') {
             setMovies([]);
             setTotal(0);
-            console.log(pageUrl);
         };
 
         async function getSearch() {
@@ -59,9 +58,7 @@ export default function Movies() {
 
     const handlerClickLoadMore = () => {
         setPage(prevPage => (prevPage + 1));
-        console.log(page);
         searchParams.set('page', (page + 1));
-        console.log(page);
         setSearchParams(searchParams);
     };
 

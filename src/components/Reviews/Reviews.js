@@ -16,11 +16,8 @@ export const Reviews = () => {
                 setLoader(true);
                 const { results
                 } = await getMovieDetailsReviews(movieId);
-                setReview(results.map(result => result.content)
-                );
-                console.log(results.map(result => result.content)
+                setReview(results.map(result => result.content));
 
-                );
             } catch (error) {
                 toast.error('Oops... something went wrong, please reload the page!');
             } finally {
@@ -36,5 +33,5 @@ export const Reviews = () => {
             {review.length === 0 && <P>There are no reviews for this movie</P>}
             {loader && <Loader />}
         </>
-    )
-}
+    );
+};
