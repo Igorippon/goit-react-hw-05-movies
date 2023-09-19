@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 
-export const Header = styled.header`
+export const Div = styled.div`
 //  top: 0;
 //   left: 0;
   width: 100%;

@@ -36,7 +36,7 @@ export const Reviews = () => {
     return (
         <>
             <Review>{review}</Review>
-            {review.length === 0 && <P>Nothing found for your request</P>}
+            {review.length === 0 && <P>There are no reviews for this movie</P>}
             {loader && <Loader />}
         </>
     )

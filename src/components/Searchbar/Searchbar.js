@@ -1,13 +1,13 @@
-import PropTypes from 'prop-types';
-import { Button, Form, Header, Input } from "./Searchbar.styled"
+// import PropTypes from 'prop-types';
+import { Button, Div, Form, Input } from "./Searchbar.styled"
 import { FcSearch } from 'react-icons/fc';
 import toast from 'react-hot-toast';
-// import { useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
-export const Searchbar = ({ onSubmit }) => {
-    // const [setSearchParams] = useSearchParams();
-    // console.log(useSearchParams())
-    // const query = searchParams.get('query');
+export const Searchbar = () => {
+    const [searchParams, setSearchParams] = useSearchParams();
+    // const query = searchParams.get('query') ?? '';
+    //     console.log(setSearchParams);
 
     const handlerSubmit = (evt) => {
         evt.preventDefault();
@@ -17,14 +17,20 @@ export const Searchbar = ({ onSubmit }) => {
             toast.error('Please enter search words');
             return;
         }
-        // setSearchParams({ query: searchValue })
-        onSubmit(searchValue);
+        searchParams.set('query', searchValue);
+        searchParams.set('page', 1)
+        setSearchParams(searchParams);
+        // onSubmit(searchValue);
         evt.target.reset();
 
     };
 
+
+    // console.log(searchParams.getAll());
+    console.log(useSearchParams());
+
     return (
-        <Header>
+        <Div>
             <Form onSubmit={handlerSubmit}>
                 <Input
                     type="text"
@@ -37,10 +43,10 @@ export const Searchbar = ({ onSubmit }) => {
                     <FcSearch />
                 </Button>
             </Form>
-        </Header>
+        </Div>
     );
 };
 
-Searchbar.propTypes = {
-    onSubmit: PropTypes.func.isRequired,
-};
+// Searchbar.propTypes = {
+//     onSubmit: PropTypes.func.isRequired,
+// };
