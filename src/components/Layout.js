@@ -44,9 +44,6 @@ height:100%;
 align-items:center;
 `;
 
-
-
-
 export const Layout = () => {
     return (
         <Wraper>

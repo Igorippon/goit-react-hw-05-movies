@@ -11,5 +11,4 @@ display: grid;
  list-style: none;
  margin-left: auto;
  margin-right: auto;
-/* list - style: inside; */
 `;

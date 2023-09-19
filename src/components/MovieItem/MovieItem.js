@@ -31,6 +31,6 @@ export const MovieItem = ({ image, title, date, score, genres, overview }) => {
                     </li>
                 </Ul>
             </Div>
-        </Container >
+        </Container>
     );
 };

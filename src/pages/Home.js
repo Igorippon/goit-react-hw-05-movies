@@ -5,8 +5,6 @@ import { useEffect } from "react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-
-
 export default function Home() {
     const [movies, setMovies] = useState([]);
     const [loader, setLoader] = useState(false);

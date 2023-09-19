@@ -7,7 +7,6 @@ import { P, Review } from "./Reviews.styled";
 
 export const Reviews = () => {
     const [loader, setLoader] = useState(false);
-    // const [error, setError] = useState(false);
     const [review, setReview] = useState([]);
     const { movieId } = useParams();
 
@@ -15,7 +14,6 @@ export const Reviews = () => {
         async function getReviews() {
             try {
                 setLoader(true);
-                // setError(false);
                 const { results
                 } = await getMovieDetailsReviews(movieId);
                 setReview(results.map(result => result.content)
@@ -24,7 +22,6 @@ export const Reviews = () => {
 
                 );
             } catch (error) {
-                // setError(true);
                 toast.error('Oops... something went wrong, please reload the page!');
             } finally {
                 setLoader(false);
