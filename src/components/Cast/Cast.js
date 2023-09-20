@@ -6,20 +6,21 @@ import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import { List } from "./Cats.styled";
 
-export const Cast = () => {
+export default function Cast() {
+
     const [loader, setLoader] = useState(false);
     const [error, setError] = useState(false);
     const [cast, setCast] = useState([]);
-
     const { movieId } = useParams();
     const defaultImg = 'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
 
     useEffect(() => {
+        const controller = new AbortController();
         async function getCast() {
             try {
                 setLoader(true);
                 setError(false);
-                const { cast } = await getMovieDetailsCredits(movieId);
+                const { cast } = await getMovieDetailsCredits(movieId, { signal: controller.signal, });
                 setCast(cast);
             } catch (error) {
                 setError(true);
@@ -29,6 +30,7 @@ export const Cast = () => {
             };
         };
         getCast();
+        return () => { controller.abort(); };
     }, [movieId]);
 
     return (

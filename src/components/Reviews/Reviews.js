@@ -5,17 +5,18 @@ import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import { P, Review } from "./Reviews.styled";
 
-export const Reviews = () => {
+export default function Reviews() {
     const [loader, setLoader] = useState(false);
     const [review, setReview] = useState([]);
     const { movieId } = useParams();
 
     useEffect(() => {
+        const controller = new AbortController();
         async function getReviews() {
             try {
                 setLoader(true);
                 const { results
-                } = await getMovieDetailsReviews(movieId);
+                } = await getMovieDetailsReviews(movieId, { signal: controller.signal, });
                 setReview(results.map(result => result.content));
 
             } catch (error) {
@@ -25,6 +26,7 @@ export const Reviews = () => {
             };
         }
         getReviews();
+        return () => { controller.abort(); };
     }, [movieId]);
 
     return (

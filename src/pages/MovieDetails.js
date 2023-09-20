@@ -1,7 +1,7 @@
 import { getMovieDetails } from "api";
 import { Loader } from "components/Loader/Loader";
 import { MovieItem } from "components/MovieItem/MovieItem";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { Outlet, useParams } from "react-router-dom";
@@ -16,7 +16,6 @@ export default function MovieDetails() {
     const [loader, setLoader] = useState(false);
     const [error, setError] = useState(false);
     const [score, setScore] = useState('');
-
     const { movieId } = useParams();
 
     useEffect(() => {
@@ -28,9 +27,7 @@ export default function MovieDetails() {
             try {
                 setLoader(true);
                 setError(false);
-                const { title, release_date, overview, genres, poster_path, vote_average
-
-                } = await getMovieDetails(movieId, { signal: controller.signal, });
+                const { title, release_date, overview, genres, poster_path, vote_average } = await getMovieDetails(movieId, { signal: controller.signal, });
                 setTitle(title);
                 setDate(release_date.slice(0, 4));
                 setOverview(overview);
@@ -47,23 +44,23 @@ export default function MovieDetails() {
         getMovie();
         return () => {
             controller.abort();
-        }
+        };
     }, [movieId]);
-
 
     return (
         <>
-
-            {
-                !error && <MovieItem image={image}
-                    title={title}
-                    date={date}
-                    score={score}
-                    genres={genres}
-                    overview={overview} />
-            }
-            <Outlet />
+            {!error && <MovieItem
+                title={title}
+                date={date}
+                overview={overview}
+                image={image}
+                genres={genres}
+                score={score}
+            />}
+            <Suspense fallback={<Loader />}>
+                <Outlet />
+            </Suspense>
             {loader && <Loader />}
         </>
     );
-}
+};

@@ -15,11 +15,12 @@ export default function Movies() {
     const pageUrl = searchParams.get('page') ?? '';
     const [movies, setMovies] = useState([]);
     const [loader, setLoader] = useState(false);
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState();
     const [total, setTotal] = useState(0);
 
     useEffect(() => {
         if (!search) {
+            setMovies([]);
             return
         };
         const controller = new AbortController();
@@ -37,7 +38,7 @@ export default function Movies() {
                     toast.error('Nothing found for your request');
                     return;
                 };
-                if (pageUrl === 1) {
+                if (pageUrl === '1') {
                     toast.success(`Hooray! We found ${total_results
                         } movies.`);
                 }

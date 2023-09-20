@@ -23,7 +23,6 @@ export default function Home() {
                 if (error.code !== 'ERR_CANCELED') {
                     toast.error('Oops... something went wrong, please reload the page!');
                 }
-
             } finally {
                 setLoader(false);
             };
