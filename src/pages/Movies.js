@@ -12,10 +12,10 @@ import { useSearchParams } from "react-router-dom";
 export default function Movies() {
     const [searchParams, setSearchParams] = useSearchParams();
     const search = searchParams.get('query') ?? '';
-    const pageUrl = searchParams.get('page') ?? '';
+    const pageUrl = searchParams.get('page') ?? '1';
     const [movies, setMovies] = useState([]);
     const [loader, setLoader] = useState(false);
-    const [page, setPage] = useState();
+    const [page, setPage] = useState(1);
     const [total, setTotal] = useState(0);
 
     useEffect(() => {

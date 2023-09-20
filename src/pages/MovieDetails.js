@@ -49,7 +49,7 @@ export default function MovieDetails() {
 
     return (
         <>
-            {!error && <MovieItem
+            {title && !error && <MovieItem
                 title={title}
                 date={date}
                 overview={overview}
