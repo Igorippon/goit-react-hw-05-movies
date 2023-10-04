@@ -13,7 +13,7 @@ export const MovieItem = ({ title, date, overview, genres, score, image }) => {
         <Container>
             <StyledLinkGo to={backLinkLocationRef.current} >Go Back</StyledLinkGo>
             <Item>
-                <img src={image ? `https://image.tmdb.org/t/p/w500/${image}` : defaultImg} width={250} alt={title}></img>
+                <img src={image ? `https://image.tmdb.org/t/p/w500/${image}` : defaultImg} width={360} alt={title}></img>
                 <Div>   <h2>{title} ({date})</h2>
                     <p>User Score: {score}%</p>
                     <h3>Overview</h3>

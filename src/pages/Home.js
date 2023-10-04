@@ -35,7 +35,6 @@ export default function Home() {
 
     return (
         <>
-            <h2 style={{ padding: '20px 20px 0px 20px' }}>Trending today</h2>
             {loader && <Loader />}
             {movies.length > 0 && <MoviesList movies={movies} />}
         </>

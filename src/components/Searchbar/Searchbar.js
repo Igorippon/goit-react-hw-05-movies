@@ -24,6 +24,9 @@ export const Searchbar = () => {
     return (
         <Div>
             <Form onSubmit={handlerSubmit}>
+                <Button type="submit" >
+                    <FcSearch />
+                </Button>
                 <Input
                     type="text"
                     name="search"
@@ -31,9 +34,7 @@ export const Searchbar = () => {
                     autoFocus
                     placeholder="Search movie"
                 />
-                <Button type="submit" >
-                    <FcSearch />
-                </Button>
+
             </Form>
         </Div>
     );
